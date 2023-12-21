@@ -1,0 +1,89 @@
+create database ceol_radio;
+
+
+create table Record_label ( id int unsigned not null,
+name varchar(50) not null, primary key (id),
+unique key name_of_label (name) ); 
+
+insert into name_of_label value(1, 'Warner Music' );
+insert into name_of_label value(2, 'Universal Music' );
+insert into name_of_label value(3, 'Sony Music Entertainment' );
+insert into name_of_label value(4, 'Independent Artist');
+
+create table artist ( id int unsigned not null,
+record_label_id int unsigned not null,
+name varchar(50) not null, primary key(id), 
+key record_label_artist (record_label_id), 
+constraint record_label_artist foreign key (record_label_id) references record_label (id),
+unique key name_artist (record_label_id, name) );
+
+insert into artist values(1, 1, 'E-40' );
+insert into artist values(2,1, 'Red Hot Chilipeppers');
+insert into artist values (3,1, 'Green Day'); 
+insert into artist values(4,2, 'Taylor Swift');
+insert into artist values (5,2, 'Jay-Z');
+insert into artist values(6,2, 'Kendrick Lamar');
+insert into artist values(7,3, 'Doja Cat');
+insert into artist values(8,3, 'Tyler Childers');
+insert into artist values(9,3, '21 Savage');
+
+create table album ( id int unsigned not null, 
+artist_id int unsigned not null,
+name varchar(50) not null,
+year int unsigned not null, primary key (id),
+key artist_in_album (artist_id),
+constraint artist_in_album foreign key (artist_id) references artist (id),
+unique key name_of_album (artist_id, name));
+
+  insert into album values(1, 1, 'in a major way',1995);
+  insert into album values(2,1, 'Californication',1999);
+insert into album values(3,1, 'American idiot',2004);
+insert into album values(4,2, '1989',2014);
+insert into album values(5,2, 'The Blueprint',2001);
+insert into album values(6,2, 'To Pimp a Butterfly',2015);
+insert into album values(7,3, 'Scarlet',2023);
+insert into album values(8,3, 'Purgatory',2017);
+insert into album values(9,3, 'Without Warning',2017);
+
+Create table song (id int unsigned not null, 
+album_id int unsigned not null, 
+name varchar(50) not null,
+duration real not null,
+Primary key (id),
+key song_in_album (album_id),
+constraint album_in_song foreign key (album_id) references album (id),
+unique key name_of_song (album_id, name));
+
+insert into song values(1, 1, 'Sprinkle Me',4.10);
+insert into song values(2,1, '1-Luv' ,5.08);
+insert into song values(3,2, 'Californication' ,5.22);
+insert into song values(4,2, 'Scar Tissue' , 3.37);
+insert into song values(5,3, 'Holiday/Boulevard of broken dreams', 8.14);
+insert into song values(6,3, 'American Idiot', 2.54);
+insert into song values(7,4, 'Blank Space', 3.52);
+insert into song values(8,4, 'Bad Blood', 3.32);
+insert into song values(9,5, 'Renegade', 5.38);
+insert into song values(10,5, 'never change', 3.59);
+insert into song values(11,6, 'Hood Politics', 4.53);
+insert into song values(12,6, 'u', 4.28);
+insert into song values(13,7, 'Paint The Town Red', 3.51);
+insert into song values(14,7, 'Demons' , 3.16);
+insert into song values(15,8, 'Lady May' , 3.04);
+insert into song values(16,8, 'Feathered Indians', 3.45);
+insert into song values(17,9, 'Ric Flair Drip', 2.53);
+insert into song values(18,9, 'Disrespectful' ,2.40);
+
+create table Radio_DJ ( id int unsigned not null,
+name varchar(50) not null, primary key (id),
+unique key Radio_DJ (name) ); 
+
+insert into radio_dj value(19, 'Roman Wilder Monday');
+insert into radio_dj value(20, 'Vande Sky Tuesday');
+insert into radio_dj value(21, 'DJ Phill Wednesday');
+insert into radio_dj value(22, 'Braxton Pak, Thursday');
+insert into radio_dj value(23, 'Liquid ,Friday');
+insert into radio_dj value(24, 'The Movement, Saturday');
+insert into radio_dj value(25, 'Phake Sunday');
+insert into radio_dj value(26, 'Jack Penn, backup' );
+insert into radio_dj value(27, 'Milo Lawson, backup');
+insert into radio_dj value(28, 'The Bridge, backup');
